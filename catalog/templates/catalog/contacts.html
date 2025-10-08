@@ -1,13 +1,18 @@
+{% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Skystore</title>
-    <!-- Подключите статичеcкие файлы со стилями Bootstrap -->
+
+    <!-- Подключаем Bootstrap через static -->
+    <link rel="stylesheet" href="{% static 'skystore/css/bootstrap.min.css' %}">
 </head>
 <body>
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+
+<!-- Навигация -->
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal">Skystore</h5>
     <nav class="ms-5">
         <a class="p-2 btn btn-outline-primary" href="/">Каталог</a>
@@ -15,14 +20,17 @@
     </nav>
 </div>
 
+<!-- Заголовок -->
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Контакты</h1>
 </div>
 
+<!-- Контент -->
 <div class="container">
     <div class="row text-start">
+        <!-- Левая часть -->
         <div class="col-lg-9 col-md-6 col-sm-12">
-            <div class="card mb-4 box-shadow">
+            <div class="card mb-4 shadow-sm">
                 <div class="card-body">
                     <table class="table table-striped">
                         <tr>
@@ -35,14 +43,16 @@
                         </tr>
                         <tr>
                             <td class="w-25">Адрес</td>
-                            <td>Redmond,WA,98052-6399</td>
+                            <td>Redmond, WA, 98052-6399</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
+
+        <!-- Правая часть (форма) -->
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card mb-4 box-shadow">
+            <div class="card mb-4 shadow-sm">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">Свяжитесь с нами</h4>
                 </div>
@@ -59,19 +69,20 @@
                         </div>
                         <div class="mb-3">
                             <label for="message">Сообщение</label>
-                            <textarea type="text" name="message" class="form-control" id="message" placeholder="Контактный телефон" required></textarea>
+                            <textarea name="message" class="form-control" id="message" placeholder="Ваше сообщение" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Отправить</button>
+                        <button type="submit" class="btn btn-lg btn-block btn-outline-primary w-100">Отправить</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Подвал -->
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
             <div class="col-12 col-md">
-                SkyStore
+                <strong>SkyStore</strong>
                 <small class="d-block mb-3 text-muted">&copy; 2023</small>
             </div>
             <div class="col-6 col-md">
@@ -100,6 +111,8 @@
     </footer>
 </div>
 
-<!-- Подключите статичеcкие файлы со скриптами Bootstrap -->
+<!-- Подключаем JS Bootstrap -->
+<script src="{% static 'skystore/js/bootstrap.bundle.min.js' %}"></script>
+
 </body>
 </html>
