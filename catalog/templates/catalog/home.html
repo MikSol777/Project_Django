@@ -8,6 +8,10 @@
     <p class="lead">Skystore — это отличный вариант хранения ваших плагинов и примеров кода, который вы бы хотели продать</p>
 </div>
 
+<div class="text-end mb-3">
+    <a href="{% url 'product_add' %}" class="btn btn-success">Добавить продукт</a>
+</div>
+
 <div class="row text-center">
     {% for product in products %}
     <div class="col-md-4 mb-4">
@@ -24,7 +28,9 @@
         </div>
     </div>
     {% empty %}
-    <p>Пока нет доступных товаров.</p>
+    <div class="col-12">
+        <p>Пока нет доступных товаров.</p>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}
