@@ -1,8 +1,17 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">Skystore</h5>
-    <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="/">Каталог</a>
-        <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
-        <a class="p-2 btn btn-outline-primary" href="/blogs/">Блог</a>
+    <nav class="ms-5 d-flex align-items-center gap-2">
+        <a class="btn btn-outline-primary" href="/">Каталог</a>
+        <a class="btn btn-outline-primary" href="/contacts/">Контакты</a>
+        <a class="btn btn-outline-primary" href="/blogs/">Блог</a>
     </nav>
+    <div class="ms-auto d-flex align-items-center gap-2">
+        {% if request.user.is_authenticated %}
+            <span class="text-muted">Привет, {{ request.user.email }}</span>
+            <a class="btn btn-outline-secondary" href="{% url 'users:logout' %}">Выйти</a>
+        {% else %}
+            <a class="btn btn-primary" href="{% url 'users:login' %}">Войти</a>
+            <a class="btn btn-success" href="{% url 'users:register' %}">Регистрация</a>
+        {% endif %}
+    </div>
 </div>
