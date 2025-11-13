@@ -1,7 +1,5 @@
 {% extends 'catalog/base.html' %}
 
-{% load widget_tweaks %}
-
 {% block title %}Добавить / Редактировать продукт - Skystore{% endblock %}
 
 {% block content %}
@@ -13,26 +11,45 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
-            <div class="mb-3">
-                <label {% if field.auto_id %}for="{{ field.auto_id }}"{% endif %} class="form-label">
-                    {{ field.label }}
-                    {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
-                </label>
+            {% if field.field.widget.input_type == "checkbox" %}
+                <div class="form-check mb-3">
+                    {{ field }}
+                    <label {% if field.auto_id %}for="{{ field.auto_id }}"{% endif %} class="form-check-label ms-2">
+                        {{ field.label }}
+                    </label>
+                    {% if field.errors %}
+                        <div class="text-danger mt-1">
+                            {% for error in field.errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted d-block">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="mb-3">
+                    <label {% if field.auto_id %}for="{{ field.auto_id }}"{% endif %} class="form-label">
+                        {{ field.label }}
+                        {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                    </label>
 
-                {{ field|add_class:"form-control" }}
+                    {{ field }}
 
-                {% if field.errors %}
-                    <div class="text-danger mt-1">
-                        {% for error in field.errors %}
-                            <div>{{ error }}</div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+                    {% if field.errors %}
+                        <div class="text-danger mt-1">
+                            {% for error in field.errors %}
+                                <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
-                {% if field.help_text %}
-                    <small class="form-text text-muted">{{ field.help_text }}</small>
-                {% endif %}
-            </div>
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+            {% endif %}
         {% endfor %}
 
         <button type="submit" class="btn btn-primary">

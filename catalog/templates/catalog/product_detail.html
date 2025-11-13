@@ -11,6 +11,29 @@
     <p><strong>Описание:</strong> {{ product.description }}</p>
     <p><strong>Категория:</strong> {{ product.category.name }}</p>
     <p><strong>Цена:</strong> {{ product.price }} ₽</p>
+    <p><strong>Статус:</strong>
+        {% if product.is_published %}
+            <span class="badge bg-success">Опубликован</span>
+        {% else %}
+            <span class="badge bg-secondary">Черновик</span>
+        {% endif %}
+    </p>
+    <p><strong>Владелец:</strong> {{ product.owner|default:"Не указан" }}</p>
     <p><em>Создан:</em> {{ product.created_at|date:"d.m.Y H:i" }}</p>
+
+    <div class="mt-4 d-flex gap-2">
+        {% if product.owner == request.user %}
+            <a href="{% url 'product_edit' product.pk %}" class="btn btn-warning">Редактировать</a>
+        {% endif %}
+        {% if product.owner == request.user or perms.catalog.delete_product %}
+            <a href="{% url 'product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+        {% endif %}
+        {% if product.is_published and (product.owner == request.user or perms.catalog.can_unpublish_product) %}
+            <form method="post" action="{% url 'product_unpublish' product.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-secondary">Снять с публикации</button>
+            </form>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

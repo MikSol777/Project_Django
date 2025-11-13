@@ -9,16 +9,19 @@ FORBIDDEN_WORDS = [
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'category', 'image']
+        fields = ['name', 'description', 'price', 'category', 'image', 'is_published']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         for field_name, field in self.fields.items():
-            if not isinstance(field.widget, forms.FileInput):
-                field.widget.attrs['class'] = 'form-control'
+            widget = field.widget
+            if isinstance(widget, forms.CheckboxInput):
+                widget.attrs['class'] = 'form-check-input'
+            elif isinstance(widget, forms.FileInput):
+                widget.attrs['class'] = 'form-control-file'
             else:
-                field.widget.attrs['class'] = 'form-control-file'
+                widget.attrs['class'] = 'form-control'
 
             if field_name == 'name':
                 field.widget.attrs['placeholder'] = 'Введите название продукта'

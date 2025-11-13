@@ -10,6 +10,6 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'price', 'category')  # показываем эти поля в списке
-    list_filter = ('category',)                        # фильтр по категории
-    search_fields = ('name', 'description')             # поиск по name и description
+    list_display = ('id', 'name', 'price', 'category', 'is_published', 'owner')  # показываем эти поля в списке
+    list_filter = ('category', 'is_published')                        # фильтр по категории
+    search_fields = ('name', 'description', 'owner__email')             # поиск по name и description
