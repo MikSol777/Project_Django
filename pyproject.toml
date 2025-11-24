@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "project-django"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+django = "^5.2.7"
+ipython = "^9.6.0"
+psycopg2-binary = "^2.9.11"
+pillow = "^11.3.0"
+python-dotenv = "^1.1.1"
+django-widget-tweaks = "^1.5.0"
+redis = "^7.1.0"
+django-redis = "^6.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

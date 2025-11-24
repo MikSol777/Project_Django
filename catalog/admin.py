@@ -1,0 +1,15 @@
+from django.contrib import admin
+from .models import Category, Product
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')              # показываем id и name
+    search_fields = ('name', 'description')    # поиск по name и description
+
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'price', 'category', 'is_published', 'owner')  # показываем эти поля в списке
+    list_filter = ('category', 'is_published')                        # фильтр по категории
+    search_fields = ('name', 'description', 'owner__email')             # поиск по name и description
